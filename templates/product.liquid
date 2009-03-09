@@ -1,0 +1,123 @@
+<div class="main2cols clearfix">
+	<div class="maincol">
+		<div id="productpage">
+			<div class="product-title-container">
+				<h2 class="product-title">{{ product.title }}</h2>
+				<div class="product-design">- designed by <strong>Jositajosi</strong></div>
+			</div>
+
+			<div class="product-info">
+				<div class="product-main-info">
+					<div class="product-category">
+						<div class="item-category">Macbook SLEEVE</div>
+						<div class="product-category-corner"></div>
+					</div>
+					<div class="product-image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="{{product.title | escape }}" /></div>
+					<div class="product-price">PRICE: <strong>{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</strong></div>
+				</div>		
+				<div class="product-description">{{ product.description }}</div>
+			</div> <!-- /.producto-info -->	
+			<div class="product-bottom-info clearfix">
+				<div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>	
+				<a class="button" id="product-add-to-cart" href="#">ADD TO CART</a>
+			</div>
+
+			<br />	
+			<br />	
+			
+			<h3>Different points of view</h3>
+			<div id="productimages" class="clearfix">
+				<ul>
+					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
+					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
+					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
+					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
+					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
+					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
+				</ul>	
+			</div> <!-- /#productimages -->	
+
+			<br />	
+			<br />	
+
+			<h3>Insights</h3>
+			<p>Woo hoo! Thanks everyone for the votes and support. I can't take all the credit -- Daddydom is the true genius behind this puppy. I had a lot of fun working and designing with him. Daddydom, you're swell! (Check your email)</p>
+			
+			<br />	
+			<br />	
+
+			<div id="recipe-container">
+				<h3>The recipe</h3>
+				<ul class="recipe-list">
+					<li class="cotton"><strong>80%</strong> cotton</li>
+					<li class="woolen"><strong>15%</strong> woolen</li>
+					<li class="polymide"><strong>5%</strong> polymide</li>
+				</ul>
+			</div>
+			
+			<div id="product-ambassador">
+				<h3>Be an ambassador of this product</h3>
+				<p>Share it with family and friends:</p>
+				<ul class="share-icons">
+					<li><a href="#"><img src="{{ 'share-twitter.gif' | asset_url }}" alt="twitter" /></a></li>
+					<li><a href="#"><img src="{{ 'share-facebook.gif' | asset_url }}" alt="facebook" /></a></li>
+					<li><a href="#"><img src="{{ 'share-delicious.gif' | asset_url }}" alt="delicious" /></a></li>
+				</ul>
+				<form name="f_share" id="f_share" action="f_share" method="post">
+					<label for="email">Or share by email:</label><br />
+					<input type="text" name="email" id="email" class="fieldbox" value="Enter the email address..." />
+					<div class="form_actions">
+						<input type="submit" name="submit" value="SEND" class="button" />
+					</div>
+				</form>	
+			</div>		
+			
+			<div class="clearfix"></div>
+			
+			<br />
+			
+			<div class="pages-navigation clearfix">
+				<a href="#" class="button page-prev"><img src="{{ 'arrow-left.gif' | asset_url }}" alt="Go to previous product" /> PREVIOUS PRODUCT</a>
+				<a href="#" class="button page-next">NEXT PRODUCT <img src="{{ 'arrow-right.gif' | asset_url }}" alt="Go to next product" /></a>
+			</div>	
+				
+
+		</div> <!-- /#productpage -->
+	</div> <!-- /.maincol -->
+	
+	<div class="sidecol">
+		<div class="product-related">
+			<h3><strong>Love it?</strong> You might also love them too</h3>
+			<ul>
+				<li class="clearfix">
+					<h4><a href="#">Winter in Oxford</a></h4>
+					<a href="#" class="category-thumb computer">Macbook Sleeves</a>
+					<div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
+					<div class="price">
+						PRICE: <strong>$25</strong>
+						<div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
+					</div>
+				</li>	
+				<li class="clearfix">
+					<h4><a href="#">Winter in Oxford</a></h4>
+					<a href="#" class="category-thumb computer">Macbook Sleeves</a>
+					<div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
+					<div class="price">
+						PRICE: <strong>$25</strong>
+						<div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
+					</div>
+				</li>	
+				<li class="clearfix">
+					<h4><a href="#">Winter in Oxford</a></h4>
+					<a href="#" class="category-thumb computer">Macbook Sleeves</a>
+					<div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
+					<div class="price">
+						PRICE: <strong>$25</strong>
+						<div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
+					</div>
+				</li>	
+			</ul>	
+		</div>
+			
+	</div> <!-- /.sidecol -->		
+</div> <!-- /.main2cols -->	
