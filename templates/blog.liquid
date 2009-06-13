@@ -7,21 +7,21 @@
 
     <div class="article">
       <div class="headline">
-  		<h3 class="title">{{ article.title }}</h3>
-  		<h4 class="date">Posted on {{ article.created_at | date: "%B %d, '%y" }} by {{ article.author }}.</h4>
+      <h3 class="title">{{ article.title }}</h3>
+      <h4 class="date">Posted on {{ article.created_at | date: "%B %d, '%y" }} by {{ article.author }}.</h4>
       </div>
-    
+
       <div class="article-body textile">
         {{ article.content }}
-      </div>    
+      </div>
     </div>
-  
+    <br/>
     {% endfor %}
-    
+
     <div id="pagination">
       {{ paginate | default_pagination }}
     </div>
 
   {% endpaginate %}
-  
+
 </div>

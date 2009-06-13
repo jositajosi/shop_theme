@@ -1,123 +1,149 @@
 <div class="main2cols clearfix">
-	<div class="maincol">
-		<div id="productpage">
-			<div class="product-title-container">
-				<h2 class="product-title">{{ product.title }}</h2>
-				<div class="product-design">- designed by <strong>Jositajosi</strong></div>
-			</div>
+  <div class="maincol">
+    <div id="productpage">
+      <div class="product-title-container">
+        <h2 class="product-title">{{ product.title }}</h2>
+        <div class="product-design">- designed by <strong>Jositajosi</strong></div>
+      </div>
 
-			<div class="product-info">
-				<div class="product-main-info">
-					<div class="product-category">
-						<div class="item-category">Macbook SLEEVE</div>
-						<div class="product-category-corner"></div>
-					</div>
-					<div class="product-image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="{{product.title | escape }}" /></div>
-					<div class="product-price">PRICE: <strong>{{ product.price_min | money }}{% if product.price_varies %} - {{ product.price_max | money }}{% endif %}</strong></div>
-				</div>		
-				<div class="product-description">{{ product.description }}</div>
-			</div> <!-- /.producto-info -->	
-			<div class="product-bottom-info clearfix">
-				<div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>	
-				<a class="button" id="product-add-to-cart" href="#">ADD TO CART</a>
-			</div>
+      <div class="product-info">
+        <div class="product-main-info">
+          <div class="product-category">
+            <div class="item-category">{{product.type | escape }}</div>
+            <div class="product-category-corner"></div>
+          </div>
+          <div class="product-image">
+            featured_image
+            <img src="{{ product.featured_image | product_img_url: 'large'}}" alt="{{product.title | escape }}" />
+            </div>
+          <div class="product-price">PRICE: 
+            <strong>
+              {{ product.price_min | money }}
+              {% if product.price_varies %}
+                 - {{ product.price_max | money }}
+              {% endif %}
+            </strong>
+          </div>
+        </div>    
+        <div class="product-description">{{ product.description }}</div>
+      </div> <!-- /.producto-info --> 
+      <div class="product-bottom-info clearfix">
+        <!--<div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>-->
+        <select name="id">
+          {% for variant in product.variants %}
+            {% if variant.available == true %}
+              <option value="{{variant.id}}"> {{ variant.title }} for {{ variant.price | money_with_currency }} </option>
+            {% else %}
+              <option disabled="disabled"> {{ variant.title }} - sold out! </option>
+            {% endif %}
+          {% endfor %}
+        </select>    
+        <a class="button" id="product-add-to-cart" href="#">ADD TO CART</a>
+      </div>
 
-			<br />	
-			<br />	
-			
-			<h3>Different points of view</h3>
-			<div id="productimages" class="clearfix">
-				<ul>
-					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
-					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
-					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
-					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
-					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
-					<li><div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div></li>
-				</ul>	
-			</div> <!-- /#productimages -->	
+      <br />  
+      <br />  
+      
+      <h3>Different points of view</h3>
+      <div id="productimages" class="clearfix">   
+        <ul>
+        {% for image in product.images %}       
+          {% if image != product.featured_image %}    
+            <li>
+              <div class="thumb-medium">          
+                <!-- class="product-thumbs" rel="lightbox[product]" -->
+                <a href="{{ image | product_img_url: 'large' }}">
+                  <img src="{{ image | product_img_url: 'small'}}" alt="{{product.title | escape }}" />
+                </a>
+              </div>
+            </li>
+          {% endif %}       
+        {% endfor %}
+      </div> <!-- /#productimages --> 
 
-			<br />	
-			<br />	
+      <br />  
+      <br />  
 
-			<h3>Insights</h3>
-			<p>Woo hoo! Thanks everyone for the votes and support. I can't take all the credit -- Daddydom is the true genius behind this puppy. I had a lot of fun working and designing with him. Daddydom, you're swell! (Check your email)</p>
-			
-			<br />	
-			<br />	
+      <!--<h3>Insights</h3>
+      <p>Woo hoo! Thanks everyone for the votes and support. I can't take all the credit -- Daddydom is the true genius behind this puppy. I had a lot of fun working and designing with him. Daddydom, you're swell! (Check your email)</p>   -->
+      
+      <br />  
+      <br />  
 
-			<div id="recipe-container">
-				<h3>The recipe</h3>
-				<ul class="recipe-list">
-					<li class="cotton"><strong>80%</strong> cotton</li>
-					<li class="woolen"><strong>15%</strong> woolen</li>
-					<li class="polymide"><strong>5%</strong> polymide</li>
-				</ul>
-			</div>
-			
-			<div id="product-ambassador">
-				<h3>Be an ambassador of this product</h3>
-				<p>Share it with family and friends:</p>
-				<ul class="share-icons">
-					<li><a href="#"><img src="{{ 'share-twitter.gif' | asset_url }}" alt="twitter" /></a></li>
-					<li><a href="#"><img src="{{ 'share-facebook.gif' | asset_url }}" alt="facebook" /></a></li>
-					<li><a href="#"><img src="{{ 'share-delicious.gif' | asset_url }}" alt="delicious" /></a></li>
-				</ul>
-				<form name="f_share" id="f_share" action="f_share" method="post">
-					<label for="email">Or share by email:</label><br />
-					<input type="text" name="email" id="email" class="fieldbox" value="Enter the email address..." />
-					<div class="form_actions">
-						<input type="submit" name="submit" value="SEND" class="button" />
-					</div>
-				</form>	
-			</div>		
-			
-			<div class="clearfix"></div>
-			
-			<br />
-			
-			<div class="pages-navigation clearfix">
-				<a href="#" class="button page-prev"><img src="{{ 'arrow-left.gif' | asset_url }}" alt="Go to previous product" /> PREVIOUS PRODUCT</a>
-				<a href="#" class="button page-next">NEXT PRODUCT <img src="{{ 'arrow-right.gif' | asset_url }}" alt="Go to next product" /></a>
-			</div>	
-				
+      <div id="recipe-container">
+        <h3>The recipe</h3>
+        <ul class="recipe-list">
+          <li class="cotton"><strong>80%</strong> cotton</li>
+          <li class="woolen"><strong>15%</strong> woolen</li>
+          <li class="polymide"><strong>5%</strong> polymide</li>
+        </ul>
+      </div>
+      
+      <div id="product-ambassador">
+        <h3>Be an ambassador of this product</h3>
+        <p>Share it with family and friends:</p>
+        <ul class="share-icons">
+          <li><a href="#"><img src="{{ 'share-twitter.gif' | asset_url }}" alt="twitter" /></a></li>
+          <li><a href="#"><img src="{{ 'share-facebook.gif' | asset_url }}" alt="facebook" /></a></li>
+          <li><a href="#"><img src="{{ 'share-delicious.gif' | asset_url }}" alt="delicious" /></a></li>
+        </ul>
+        <form name="f_share" id="f_share" action="f_share" method="post">
+          <label for="email">Or share by email:</label><br />
+          <input type="text" name="email" id="email" class="fieldbox" value="Enter the email address..." />
+          <div class="form_actions">
+            <input type="submit" name="submit" value="SEND" class="button" />
+          </div>
+        </form> 
+      </div>    
+      
+      <div class="clearfix"></div>
+      
+      <br />
+      
+      <div class="pages-navigation clearfix">
+          
+        
+        <a href="#" class="button page-prev"><img src="{{ 'arrow-left.gif' | asset_url }}" alt="Go to previous product" /> PREVIOUS PRODUCT</a>
+        <a href="#" class="button page-next">NEXT PRODUCT <img src="{{ 'arrow-right.gif' | asset_url }}" alt="Go to next product" /></a>
+        
+        {% if collection %}            
+           {% if collection.previous_product %}
+              {{ 'Previous Product' | link_to: collection.previous_product }} |
+           {% endif %}
+           {% if collection.next_product %}
+             {{ 'Next Product' | link_to: collection.next_product }}
+           {% endif %}
+        {% endif %}
+        
+        
+      </div>  
+        
 
-		</div> <!-- /#productpage -->
-	</div> <!-- /.maincol -->
-	
-	<div class="sidecol">
-		<div class="product-related">
-			<h3><strong>Love it?</strong> You might also love them too</h3>
-			<ul>
-				<li class="clearfix">
-					<h4><a href="#">Winter in Oxford</a></h4>
-					<a href="#" class="category-thumb computer">Macbook Sleeves</a>
-					<div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
-					<div class="price">
-						PRICE: <strong>$25</strong>
-						<div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
-					</div>
-				</li>	
-				<li class="clearfix">
-					<h4><a href="#">Winter in Oxford</a></h4>
-					<a href="#" class="category-thumb computer">Macbook Sleeves</a>
-					<div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
-					<div class="price">
-						PRICE: <strong>$25</strong>
-						<div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
-					</div>
-				</li>	
-				<li class="clearfix">
-					<h4><a href="#">Winter in Oxford</a></h4>
-					<a href="#" class="category-thumb computer">Macbook Sleeves</a>
-					<div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
-					<div class="price">
-						PRICE: <strong>$25</strong>
-						<div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
-					</div>
-				</li>	
-			</ul>	
-		</div>
-			
-	</div> <!-- /.sidecol -->		
-</div> <!-- /.main2cols -->	
+    </div> <!-- /#productpage -->
+  </div> <!-- /.maincol -->
+  
+  <div class="sidecol">
+    <div class="product-related">
+      <h3><strong>Love it?</strong> You might also love them too</h3>
+      <ul>    
+        {% for product in collections.frontpage.products %}
+           <li class="clearfix">
+             <h4><a href="{{product.url}}">{{product.title}}</a></h4>
+             <a href="#" class="category-thumb computer">{{product.type | escape }}</a>
+             <a href="#" class="category-thumb {{product.type | escape }}">{{product.type | escape }}</a>
+             <div class="thumb-medium">
+               <a href="{{product.url}}" class="ili-top-image">
+                 <img src="{{ product.featured_image | product_img_url: 'small' }}" alt="{{ product.title | escape }}"/>
+               </a>
+             </div>
+             <div class="price">
+               FROM: <br/><strong>{{product.price_min | money}}</strong>
+               <div class="add-cart"><a href="{{product.url}}" class="button">SEE  THIS!</a></div>
+             </div>
+           </li>
+        {% endfor %}
+      </ul> 
+    </div>
+      
+  </div> <!-- /.sidecol -->   
+</div> <!-- /.main2cols --> 

@@ -1,93 +1,93 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>{{shop.name}} - {{page_title}}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>{{shop.name}} - {{page_title}}</title>
 
-	{{ 'textile.css'  | global_asset_url | stylesheet_tag }}
-	{{ 'lightbox.css' | global_asset_url | stylesheet_tag }}
-	{{ 'prototype.js' | global_asset_url | script_tag }}	
-	{{ 'effects.js'   | global_asset_url | script_tag }}	
-	{{ 'lightbox.js'  | global_asset_url | script_tag }}	
+  {{ 'textile.css'  | global_asset_url | stylesheet_tag }}
+  {{ 'lightbox.css' | global_asset_url | stylesheet_tag }}
+  {{ 'prototype.js' | global_asset_url | script_tag }}
+  {{ 'effects.js'   | global_asset_url | script_tag }}
+  {{ 'lightbox.js'  | global_asset_url | script_tag }}
 
-	{{ 'layout.css'   | asset_url | stylesheet_tag }}
-	{{ 'shop.js'      | asset_url | script_tag }}
+  {{ 'layout.css'   | asset_url | stylesheet_tag }}
+  {{ 'shop.js'      | asset_url | script_tag }}
 
-	{{ content_for_header }}
+  {{ content_for_header }}
 </head>
 
 <body id="page-{{template}}">
-  
-	<div id="container">
-		
-		<div id="leftside">
-			<h1 id="logo"><a href="/" title="Go Home {{shop.name}}"><img src="{{ 'logo.gif' | asset_url }}" alt="Go Home {{shop.name}}" /></a></h1>
-			
-			<div id="main-menu">
-				<h2>For pleasure &amp; care</h2>
-				<ul>
-			    	{% for link in linklists.main-menu.links %}
-			    		<li id="menu-{{ link.id}}"><a id="link-menu-{{ link.id}}" href="{{link.url}}"><span>{{link.title}}</span></a></li>
-			    	{% endfor %}
-				</ul>
-			</div>	
-		</div> <!-- /.leftside -->	
 
-		<div id="main">
+  <div id="container">
 
-			<div id="header" class="clearfix">
-				<div id="head"><img src="{{ 'head.gif' | asset_url }}" alt="We can sew lots of pieces of life with our hands." /></div>
-				<div id="header-options">
-					<ul>
-						<li><a href="#">customize</a></li>
-						<li><a href="#">shipping</a></li>
-						<li><a href="#">blog</a></li>
-					</ul>
-				</div>
-				<div id="minicart" {% if cart.item_count <= 0 %}class="empty"{% endif %}>
-					<div id="minicart-message">{% if cart.item_count > 0 %}Great!{% else %}Snif!{% endif %}</div>
-					<div id="minicart-items"><strong>{{ cart.item_count }}</strong> {{ cart.item_count | pluralize: 'item', 'items' }} in your cart</div>
-					{% if cart.item_count > 0 %}<div id="minicart-link"><a href="/cart" title="View your cart" class="button">VISIT CART / CHECKOUT</a></div>{% endif %}
-				</div>	
-			</div> <!-- /#header -->
-			
-			<div class="clearfix"></div>
-			
-			<div id="maincontent">
-				{{ content_for_layout }}
-			</div> <!-- /#maincontent -->		
+    <div id="leftside">
+      <h1 id="logo"><a href="/" title="Go Home {{shop.name}}"><img src="{{ 'logo.gif' | asset_url }}" alt="Go Home {{shop.name}}" /></a></h1>
 
-		</div> <!-- /#main -->
-		
-	</div> <!-- /#container -->
+      <div id="main-menu">
+        <h2>For pleasure &amp; care</h2>
+        <ul>
+            {% for link in linklists.main-menu.links %}
+              <li id="menu-{{ link.id}}"><a id="link-menu-{{ link.id}}" href="{{link.url}}"><span>{{link.title}}</span></a></li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div> <!-- /.leftside -->
 
-	<div id="footer">
-		<div id="footer-content" class="footer-image-1">
-			<div id="footer-about" class="footer-block">
-				<h2>What about us?</h2>
-				<p>Jositajosi is based in Barakaldo, Spain. We design, make and sell handcrafts. And we distribute handcrafts made by other designers too.</p>
-			</div>	
-			<div id="footer-contact" class="footer-block">
-				<h2>Feel free to contact</h2>
-				<p>We will love to hear from you! Drop us a line filling our <a href="#">contact form</a>.</p>
-			</div>
-			<div id="footer-ambassadors" class="footer-block">
-				<h2>The Ambassadors</h2>
-				<p>Here come your favourite social tools to share this to everywhere!</p>
-				<p>
-					<a href="#" class="footer-share-ico"><img src="{{ 'footer-twitter.gif' | asset_url }}" alt="twitter" /></a>
-					<a href="#" class="footer-share-ico"><img src="{{ 'footer-facebook.gif' | asset_url }}" alt="facebook" /></a>
-					<a href="#" class="footer-share-ico"><img src="{{ 'footer-delicious.gif' | asset_url }}" alt="delicious" /></a>
-				</p>
-			</div>		
-			<div id="footer-copyright">
-				<img id="footer-logo" src="{{ 'footer-logo.gif' | asset_url }}" alt="{{shop.name}}" />
-				&copy; 2009, Jositajosi, All designs copyright by owner. <span id="footer-links"><a href="#">PRIVACY POLYCY</a> <span class="space">//</span> <a href="#">TERMS OF USE</a></span>
-			</div>	
-		</div> <!-- /#footer-content -->	
-	</div> <!-- /#footer -->
+    <div id="main">
+
+      <div id="header" class="clearfix">
+        <div id="head"><img src="{{ 'head.gif' | asset_url }}" alt="We can sew lots of pieces of life with our hands." /></div>
+        <div id="header-options">
+          <ul>
+            <li><a href="#">customize</a></li>
+            <li><a href="#">shipping</a></li>
+            <li><a href="#">blog</a></li>
+          </ul>
+        </div>
+        <div id="minicart" {% if cart.item_count <= 0 %}class="empty"{% endif %}>
+          <div id="minicart-message">{% if cart.item_count > 0 %}Great!{% else %}Snif!{% endif %}</div>
+          <div id="minicart-items"><strong>{{ cart.item_count }}</strong> {{ cart.item_count | pluralize: 'item', 'items' }} in your cart</div>
+          {% if cart.item_count > 0 %}<div id="minicart-link"><a href="/cart" title="View your cart" class="button">VISIT CART / CHECKOUT</a></div>{% endif %}
+        </div>
+      </div> <!-- /#header -->
+
+      <div class="clearfix"></div>
+
+      <div id="maincontent">
+        {{ content_for_layout }}
+      </div> <!-- /#maincontent -->
+
+    </div> <!-- /#main -->
+
+  </div> <!-- /#container -->
+
+  <div id="footer">
+    <div id="footer-content" class="footer-image-1">
+      <div id="footer-about" class="footer-block">
+        <h2>What about us?</h2>
+        <p>Jositajosi is based in Barakaldo, Spain. We design, make and sell handcrafts. And we distribute handcrafts made by other designers too.</p>
+      </div>
+      <div id="footer-contact" class="footer-block">
+        <h2>Feel free to contact</h2>
+        <p>We will love to hear from you! Drop us a line filling our <a href="#">contact form</a>.</p>
+      </div>
+      <div id="footer-ambassadors" class="footer-block">
+        <h2>The Ambassadors</h2>
+        <p>Here come your favourite social tools to share this to everywhere!</p>
+        <p>
+          <a href="#" class="footer-share-ico"><img src="{{ 'footer-twitter.gif' | asset_url }}" alt="twitter" /></a>
+          <a href="#" class="footer-share-ico"><img src="{{ 'footer-facebook.gif' | asset_url }}" alt="facebook" /></a>
+          <a href="#" class="footer-share-ico"><img src="{{ 'footer-delicious.gif' | asset_url }}" alt="delicious" /></a>
+        </p>
+      </div>
+      <div id="footer-copyright">
+        <img id="footer-logo" src="{{ 'footer-logo.gif' | asset_url }}" alt="{{shop.name}}" />
+        &copy; 2009, Jositajosi, All designs copyright by owner. <span id="footer-links"><a href="#">PRIVACY POLYCY</a> <span class="space">//</span> <a href="#">TERMS OF USE</a></span>
+      </div>
+    </div> <!-- /#footer-content -->
+  </div> <!-- /#footer -->
 
 </body>
 </html>

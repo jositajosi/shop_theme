@@ -1,125 +1,177 @@
 <div id="categorypage">
-	<div class="h2">Macboock Sleeve</div>
-	
-	<div class="main2cols clearfix">
-		<div class="maincol">
-				<div class="product-title-container">
-					<h2 class="product-title">Victorian Red</h2>
-					<div class="product-design">- designed by <strong>Jositajosi</strong></div>
-				</div>
+  <div class="h2">{{ collection.title }}</div>
+  {% if collection.description.size > 0 %}
+    <div class="latest-news">{{ collection.description }}</div>
+  {% endif %}
 
-				<div class="product-info">
-					<div class="product-main-info">
-						<div class="product-category">
-							<div class="item-category">Macbook SLEEVE</div>
-							<div class="product-category-corner"></div>
-						</div>
-						<div class="product-image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Victorian Red" /></div>
-						<div class="product-price">PRICE: <strong>$49</strong></div>
-					</div>		
-					<div class="product-description">There's something imperial in you and we know it.</div>
-				</div> <!-- /.producto-info -->	
-				<div class="product-bottom-info clearfix">
-					<div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>	
-					<a class="button" id="product-add-to-cart" href="#">ADD TO CART</a>
-				</div>
-				
-				<br />
-				
-				<div class="collection clearfix">
-					<ul class="products-list">
-						<li class="odd clearfix">
-							<div class="product-main-info clearfix">
-								<div class="image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Victorian Red" /></div>
-								<div class="product-price">PRICE: <strong>$49</strong></div>
-							</div>	
-							<div class="bottom-info clearfix">
-								<a class="button" href="#">ADD TO CART</a>
-								<div class="title"><a href="#">Golden Apple</a></div>
-							</div>
-							<div class="bottom-design"></div>
-						</li>	
-						<li class="even clearfix">
-							<div class="product-main-info clearfix">
-								<div class="image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Victorian Red" /></div>
-								<div class="product-price">PRICE: <strong>$49</strong></div>
-							</div>	
-							<div class="bottom-info clearfix">
-								<a class="button" href="#">ADD TO CART</a>
-								<div class="title"><a href="#">Golden Apple</a></div>
-							</div>
-							<div class="bottom-design"></div>
-						</li>
-					</ul>	
-					<ul class="products-list">		
-						<li class="clearfix">
-							<div class="product-main-info clearfix">
-								<div class="image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Victorian Red" /></div>
-								<div class="product-price">PRICE: <strong>$49</strong></div>
-							</div>	
-							<div class="bottom-info clearfix">
-								<a class="button" href="#">ADD TO CART</a>
-								<div class="title"><a href="#">Golden Apple</a></div>
-							</div>
-							<div class="bottom-design"></div>
-						</li>	
-					</ul>
-				</div>
-					
-				<br />
+  {% paginate collection.products by 2 %}   
+  <div class="main2cols clearfix">
+    <div class="maincol">
+        
 
-				<div class="pages-navigation clearfix">
-					<span class="page-prev"><a href="#" class="button page-prev"><img src="{{ 'arrow-left.gif' | asset_url }}" alt="Go to previous page" /> PREVIOUS</a></span>
-					<span class="pages">
-						<a href="#">1</a>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<span class="current">5</span>
-						<a href="#">6</a>
-						<a href="#">7</a>
-						<span>...</span>
-						<a href="#">21</a>
-						<a href="#">22</a>
-					</span>	
-					<span class="page-next"><a href="#" class="button page-next">NEXT <img src="{{ 'arrow-right.gif' | asset_url }}" alt="Go to next page" /></a></span>
-				</div>
+        <div class="collection clearfix">
+          <ul class="products-list">     
+            
+            
+            {% for product in collection.products  %}
+              {% if forloop.first %}
+                <div class="product-title-container">
+                  <h2 class="product-title"><a href="{{product.url}}">{{product.title}}</a></h2>
+                  <div class="product-design">- designed by <strong>Jositajosi</strong></div>
+                </div>
+                
+                <div class="product-info">
+                  <div class="product-main-info">
+                    <div class="product-category">
+                      <div class="item-category">{{product.type}}</div>
+                      <div class="product-category-corner"></div>
+                    </div>
+                    <div class="product-image">
+                      <img src="{{ product.featured_image | product_img_url: 'large'}}" alt="{{product.title | escape }}" />
+                    </div>
+                    <div class="product-price">
+                      PRICE: 
+                      {% if product.compare_at_price %}         
+                        {% if product.price_min != product.compare_at_price %}          
+                          {{product.compare_at_price | money}} -
+                        {% endif %}
+                      {% endif %}
+                      <strong>
+                        {{product.price_min | money}}
+                      </strong>
+                    </div>
+                  </div>
+                  <div class="product-description">{{product.description}}</div>
+                </div> 
+                <div class="product-bottom-info clearfix">
+                  <div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>
+                  <a href="{{product.url}}" class="button">VIEW DETAILS</a>
+                </div>
+                
+                <br />
+                {% else %}
+                  <li class=" clearfix">
+                    <form action="/cart/add" method="post"> 
+                      <div class="product-main-info clearfix">
+                        <div class="image">
+                          <a href="{{product.url}}">
+                            <img src="{{ product.featured_image | product_img_url: 'small' }}" alt="{{ product.title | escape }}"/>
+                          </a>  
+                        </div>
+                        <div class="product-price">
+                          PRICE: 
+                          {% if product.compare_at_price %}         
+                            {% if product.price_min != product.compare_at_price %}          
+                              {{product.compare_at_price | money}} -
+                            {% endif %}
+                          {% endif %}
+                          <strong>
+                            {{product.price_min | money}}
+                          </strong>
+                  
+                        </div>
+                      </div>
+                      <div class="bottom-info clearfix">
+                        <a href="{{product.url}}" class="button">VIEW DETAILS</a>
+                        <div class="title"><a href="{{product.url}}">{{product.title}}</a></div>
+                      </div>
+                      <div class="bottom-design"></div>
+                    </form>
+                  </li>
+                {% endif %}
+              
+            {% endfor %}           
+            
+            
+            
+            
+            
+            <li class="even clearfix">
+              <div class="product-main-info clearfix">
+                <div class="image">
+                  <img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Victorian Red" />
+                </div>
+                <div class="product-price">PRICE: <strong>$49</strong></div>
+              </div>
+              <div class="bottom-info clearfix">
+                <a href="{{product.url}}" class="button">View Details</a>
+                <a class="button" href="#">ADD TO CART</a>
+                <div class="title"><a href="{{product.url}}">{{product.title}}</a></div>
+              </div>
+              <div class="bottom-design"></div>
+            </li>
+          </ul>
+        </div>
 
-		</div> <!-- /.maincol -->
-	
-		<div class="sidecol">
-			<div class="banners">
-				<ul>
-					<li class="clearfix">
-						<div class="box-sidecol">
-							<div class="h2 x-small">Not exactly what you dreamt?</div>
-							<p>We can create customised products. You just have to choose the fabric from our catalogue.</p>
-							<div class="more"><a href="#" class="button">CUSTOMIZE</a></div>							
-						</div>
-						<div class="box-sidecol-bottom"></div>	
-					</li>	
-					<li class="clearfix">
-						<div class="box-sidecol">
-							<div class="h2 x-small">Stay tuned</div>
-							<p>
-								<img src="{{ 'logo-jositajosi-small.gif' | asset_url }}" alt="Jositajosi - Handcrafted dreams" /><br /><br />
-								Jositajosi is much more than a shop. Check out our blog to discover what we think and what we live.
-							</p>
-							<div class="more"><a href="#" class="button">VISIT OUR BLOG</a></div>							
-						</div>
-						<div class="box-sidecol-bottom"></div>	
-					</li>	
-					<li class="banner-square clearfix">
-						<div class="h2 x-small">A call for all the HANDCRAFT DESIGNERS</div>
-						<p>
-							<img src="{{ 'banner-square-image.jpg' | asset_url }}" alt="alt de la imagen" /><br /><br />
-							If you make crafts and think that Jositajosi would be a great place to sell them, don’t hesitate.
-						</p>
-						<div class="more"><a href="#" class="button">CONTACT US</a></div>							
-					</li>	
-				</ul>	
-			</div> <!-- /.banners -->
-			
-		</div> <!-- /.sidecol -->		
-	</div> <!-- /.main2cols -->
+        <br />
+        
+
+        <div class="pages-navigation clearfix">
+          {% if paginate.previous %}
+            {{ paginate.previous.title | link_to: paginate.previous.url }}
+            <span class="page-prev">
+              <a href="{{paginate.previous.url}}" class="button page-prev">
+                <img src="{{ 'arrow-left.gif' | asset_url }}" alt="Go to previous page" /> PREVIOUS
+              </a>
+            </span>  
+          {% endif %}
+          
+          <span class="pages">
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                {{ part.title | link_to: part.url }}
+              {% else %}  
+                <span class="current">{{ part.title }}</span> 
+              {% endif %}        
+            {% endfor %}
+          </span> 
+                    
+          {% if paginate.next %}
+            <span class="page-next">
+              <a href="{{paginate.next.url}}" class="button page-next">
+                NEXT <img src="{{ 'arrow-right.gif' | asset_url }}" alt="Go to next page" />
+              </a>
+            </span>         
+          {% endif %}
+        </div>
+
+    </div> <!-- /.maincol -->
+
+    <div class="sidecol">
+      <div class="banners">
+        <ul>
+          <li class="clearfix">
+            <div class="box-sidecol">
+              <div class="h2 x-small">Not exactly what you dreamt?</div>
+              <p>We can create customised products. You just have to choose the fabric from our catalogue.</p>
+              <div class="more"><a href="#" class="button">CUSTOMIZE</a></div>
+            </div>
+            <div class="box-sidecol-bottom"></div>
+          </li>
+          <li class="clearfix">
+            <div class="box-sidecol">
+              <div class="h2 x-small">Stay tuned</div>
+              <p>
+                <img src="{{ 'logo-jositajosi-small.gif' | asset_url }}" alt="Jositajosi - Handcrafted dreams" /><br /><br />
+                Jositajosi is much more than a shop. Check out our blog to discover what we think and what we live.
+              </p>
+              <div class="more"><a href="#" class="button">VISIT OUR BLOG</a></div>
+            </div>
+            <div class="box-sidecol-bottom"></div>
+          </li>
+          <li class="banner-square clearfix">
+            <div class="h2 x-small">A call for all the HANDCRAFT DESIGNERS</div>
+            <p>
+              <img src="{{ 'banner-square-image.jpg' | asset_url }}" alt="alt de la imagen" /><br /><br />
+              If you make crafts and think that Jositajosi would be a great place to sell them, don’t hesitate.
+            </p>
+            <div class="more"><a href="#" class="button">CONTACT US</a></div>
+          </li>
+        </ul>
+      </div> <!-- /.banners -->
+
+    </div> <!-- /.sidecol -->
+  </div> <!-- /.main2cols -->
+  {% endpaginate %}
+  
 </div> <!-- /#categorypage -->

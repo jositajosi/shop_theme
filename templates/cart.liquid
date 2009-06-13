@@ -10,48 +10,48 @@
 
 <h2>Your cart</h2>
 
-{% if cart.item_count == 0 %} 
+{% if cart.item_count == 0 %}
   <div class="notice">Your shopping cart is looking rather empty...</div>
 {% else %}
-	<form action="/cart" method="post" id="cartform">
-		<div id="cart">
-		    <ul id="line-items">
-		      {% for item in cart.items %}
-		      <li id="item-{{item.id}}" class="clearfix">
-				<div class="cart-item-content clearfix">
-			        <div class="thumb">
-						<div class="prodimage"><a href="{{item.product.url}}" title="View {{item.title}} Page"><img src="{{item.product.featured_image | product_img_url: 'thumb' }}" alt="{{item.title | escape }}" /></a></div>
-					</div>
-					<div class="cart-product-info">
-						<a href="#" class="category-thumb computer">Macbook Sleeves</a>
-						<h3><a href="{{item.product.url}}" title="View {{item.title | escape }} Page">
-							{{ item.title }}
-							{% if item.variant.available == true %}
-							   ({{item.variant.title}})
-							{% endif %}
-						</a></h3>
-					</div>
-					<div class="right-area">
-						<div class="itemcost">
-							{{ item.price | money }} each, <span class="money">{{item.line_price | money }}</span> total.
-						</div>
-						<div class="itemcount">
-							<label for="updates_{{item.variant.id}}">How many? </label> 
-							<input type="text" size="3" name="updates[{{item.variant.id}}]" class="fieldbox" id="updates_{{item.variant.id}}" value="{{item.quantity}}" onfocus="this.select();" />
-							<a href="#" onclick="remove_item({{item.variant.id}}); return false;" class="button">REMOVE</a>
-						</div>	
-					</div> <!-- /.right-area -->		
-				</div> <!-- /.cart-item-content -->
-				<div class="cart-item-content-bottom"></div>
-		      </li>
-		      {% endfor %}
-			</ul>
-		</div>
-	</form>	
+  <form action="/cart" method="post" id="cartform">
+    <div id="cart">
+        <ul id="line-items">
+          {% for item in cart.items %}
+          <li id="item-{{item.id}}" class="clearfix">
+        <div class="cart-item-content clearfix">
+              <div class="thumb">
+            <div class="prodimage"><a href="{{item.product.url}}" title="View {{item.title}} Page"><img src="{{item.product.featured_image | product_img_url: 'thumb' }}" alt="{{item.title | escape }}" /></a></div>
+          </div>
+          <div class="cart-product-info">
+            <a href="#" class="category-thumb computer">Macbook Sleeves</a>
+            <h3><a href="{{item.product.url}}" title="View {{item.title | escape }} Page">
+              {{ item.title }}
+              {% if item.variant.available == true %}
+                 ({{item.variant.title}})
+              {% endif %}
+            </a></h3>
+          </div>
+          <div class="right-area">
+            <div class="itemcost">
+              {{ item.price | money }} each, <span class="money">{{item.line_price | money }}</span> total.
+            </div>
+            <div class="itemcount">
+              <label for="updates_{{item.variant.id}}">How many? </label>
+              <input type="text" size="3" name="updates[{{item.variant.id}}]" class="fieldbox" id="updates_{{item.variant.id}}" value="{{item.quantity}}" onfocus="this.select();" />
+              <a href="#" onclick="remove_item({{item.variant.id}}); return false;" class="button">REMOVE</a>
+            </div>
+          </div> <!-- /.right-area -->
+        </div> <!-- /.cart-item-content -->
+        <div class="cart-item-content-bottom"></div>
+          </li>
+          {% endfor %}
+      </ul>
+    </div>
+  </form>
 
 <div id="cart-total">
-	Subtotal: <strong>{{ cart.total_price | money_with_currency }}</strong>
-	<input type="submit" id="update-cart" name="update" value="UPDATE MY CART" class="button" />
-	<input type="submit" name="checkout" value="CHECKOUT" class="button" />
+  Subtotal: <strong>{{ cart.total_price | money_with_currency }}</strong>
+  <input type="submit" id="update-cart" name="update" value="UPDATE MY CART" class="button" />
+  <input type="submit" name="checkout" value="CHECKOUT" class="button" />
 </div>
 {% endif %}
