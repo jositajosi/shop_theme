@@ -1,66 +1,88 @@
+{% paginate collections.frontpage.products by 5 %}   
+
 <div class="main2cols clearfix">
   <div class="maincol">
-    <div id="producthome">
-      <div class="h2 small">Let us show you something...</div>
-      <div class="product-title-container">
-        <h2 class="product-title">Victorian Red</h2>
-        <div class="product-design">- designed by <strong>Jositajosi</strong></div>
-      </div>
-
-      <div class="product-info">
-        <div class="product-main-info">
-          <div class="product-category">
-            <div class="item-category">Macbook SLEEVE</div>
-            <div class="product-category-corner"></div>
+    {% for product in collections.frontpage.products  %}
+      {% if forloop.first %}
+        <div id="producthome">
+          <div class="h2 small">Let us show you something...</div>
+        
+          <div class="product-title-container">
+            <h2 class="product-title"><a href="{{product.url}}">{{product.title}}</a></h2>
+            <div class="product-design">- designed by <strong>Jositajosi</strong></div>
           </div>
-          <div class="product-image"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="{{product.title | escape }}" /></div>
-          <div class="product-price">PRICE: <strong>$49</strong></div>
-        </div>
-        <div class="product-description">There's something imperial in you and we know it.</div>
-      </div> <!-- /.producto-info -->
-      <div class="product-bottom-info clearfix">
-        <div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>
-        <a class="button" id="product-add-to-cart" href="#">ADD TO CART</a>
-      </div>
-    </div> <!-- /#producthome -->
-  </div> <!-- /.maincol -->
-
+          
+          <div class="product-info">
+            <div class="product-main-info">
+              <div class="product-category">
+                <div class="item-category">{{product.type}}</div>
+                <div class="product-category-corner"></div>
+              </div>
+              <div class="product-image">
+                <img src="{{ product.featured_image | product_img_url: 'large'}}" alt="{{product.title | escape }}" />
+              </div>
+              <div class="product-price">
+                PRICE: 
+                {% if product.compare_at_price %}         
+                  {% if product.price_min != product.compare_at_price %}          
+                    {{product.compare_at_price | money}} -
+                  {% endif %}
+                {% endif %}
+                <strong>
+                  {{product.price_min | money}}
+                </strong>
+              </div>
+            </div>
+            <div class="product-description">{{product.description}}</div>
+          </div> 
+          <div class="product-bottom-info clearfix">
+            <div class="product-brief brief-computer-13">Specially made for Macbook 13&quot;</div>
+            <a href="{{product.url}}" class="button">VIEW DETAILS</a>
+          </div>
+        </div>  
+      {% else %}
+      {% endif %}
+    {% endfor %}
+  </div>     
   <div class="sidecol">
     <div class="product-related">
       <div class="h2 x-small">and what about this?</div>
       <ul>
-        <li class="clearfix">
-          <h4><a href="#">Winter in Oxford</a></h4>
-          <a href="#" class="category-thumb computer">Macbook Sleeves</a>
-          <div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
-          <div class="price">
-            PRICE: <strong>$25</strong>
-            <div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
-          </div>
-        </li>
-        <li class="clearfix">
-          <h4><a href="#">Winter in Oxford</a></h4>
-          <a href="#" class="category-thumb computer">Macbook Sleeves</a>
-          <div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
-          <div class="price">
-            PRICE: <strong>$25</strong>
-            <div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
-          </div>
-        </li>
-        <li class="clearfix">
-          <h4><a href="#">Winter in Oxford</a></h4>
-          <a href="#" class="category-thumb computer">Macbook Sleeves</a>
-          <div class="thumb-medium"><a href="#"><img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Producto title" /></a></div>
-          <div class="price">
-            PRICE: <strong>$25</strong>
-            <div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
-          </div>
-        </li>
+        {% for product in collections.frontpage.products  %}
+          {% if forloop.first %}
+          {% else %}
+            <li class="clearfix">
+              <h4><a href="{{product.url}}">{{product.title}}</a></h4>
+              <a href="{{collections[product.type | handleize].url}}" class="category-thumb computer">{{product.type}}</a>
+              <div class="thumb-medium">
+                <a href="#">
+                  <img src="{{ product.featured_image | product_img_url: 'small' }}" alt="{{ product.title | escape }}"/>
+                </a>
+              </div>
+              <div class="price">
+                PRICE:
+                {% if product.compare_at_price %}         
+                   {% if product.price_min != product.compare_at_price %}          
+                     {{product.compare_at_price | money}} -
+                   {% endif %}
+                 {% endif %}
+                 <strong>
+                   {{product.price_min | money}}
+                 </strong>
+                <div class="add-cart"><a href="#" class="button">ADD TO CART</a></div>
+              </div>
+            </li>
+          
+          
+          {% endif %}
+        {% endfor %}           
       </ul>
     </div>
-
   </div> <!-- /.sidecol -->
+  
 </div> <!-- /.main2cols -->
+
+{% endpaginate %}
 
 <br />
 

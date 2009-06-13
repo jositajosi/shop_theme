@@ -29,7 +29,6 @@
         <h2>For pleasure &amp; care</h2>
         <ul>
             {% for link in linklists.main-menu.links %}
-              <span>{{ link.object.handle }}</span>
               <li id="menu-{{ link.object.handle }}">
                 <a id="link-menu-{{ link.id}}" href="{{link.url}}">
                   <span>{{link.title}}</span>
