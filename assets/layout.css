@@ -273,12 +273,12 @@ h1 {
   cursor: pointer;
 }
 #main-menu li#menu-3 a span, #main-menu li#menu-4 a span { padding-top: 5px; height: 40px; } 
-#main-menu li#menu-1 a { background-image: url(main-menu-item-computer.gif);}
-#main-menu li#menu-10 a { background-image: url(main-menu-item-iphone.gif);}
-#main-menu li#menu-2 a { background-image: url(main-menu-item-bags.gif);}
-#main-menu li#menu-9 a { background-image: url(main-menu-item-toys.gif);}
-#main-menu li#menu-3 a { background-image: url(main-menu-item-baby.gif);}
-#main-menu li#menu-4 a { background-image: url(main-menu-item-jewelry.gif);}
+#main-menu li#menu-macbook-sleeves a { background-image: url(main-menu-item-computer.gif);}
+#main-menu li#menu-iphone-sleeves a { background-image: url(main-menu-item-iphone.gif);}
+#main-menu li#menu-bags a { background-image: url(main-menu-item-bags.gif);}
+#main-menu li#menu-toys a { background-image: url(main-menu-item-toys.gif);}
+#main-menu li#menu-baby-stuff a { background-image: url(main-menu-item-baby.gif);}
+#main-menu li#menu-jewelry a { background-image: url(main-menu-item-jewelry.gif);}
 
 
 /* HEADER CONTENT */
@@ -827,7 +827,6 @@ h2.product-title {
 }
 .products-list .product-main-info .image img {
   width: 240px;
-  height: 180px;
 }
 .products-list .product-price {
   position: absolute;

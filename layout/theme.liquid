@@ -29,7 +29,12 @@
         <h2>For pleasure &amp; care</h2>
         <ul>
             {% for link in linklists.main-menu.links %}
-              <li id="menu-{{ link.id}}"><a id="link-menu-{{ link.id}}" href="{{link.url}}"><span>{{link.title}}</span></a></li>
+              <span>{{ link.object.handle }}</span>
+              <li id="menu-{{ link.object.handle }}">
+                <a id="link-menu-{{ link.id}}" href="{{link.url}}">
+                  <span>{{link.title}}</span>
+                </a>
+              </li>
             {% endfor %}
         </ul>
       </div>
@@ -41,9 +46,11 @@
         <div id="head"><img src="{{ 'head.gif' | asset_url }}" alt="We can sew lots of pieces of life with our hands." /></div>
         <div id="header-options">
           <ul>
-            <li><a href="#">customize</a></li>
-            <li><a href="#">shipping</a></li>
-            <li><a href="#">blog</a></li>
+            {% for link in linklists.header-menu.links %}
+              <li>
+                <a href="{{link.url}}">{{link.title}}</a>
+              </li>
+            {% endfor %}
           </ul>
         </div>
         <div id="minicart" {% if cart.item_count <= 0 %}class="empty"{% endif %}>
