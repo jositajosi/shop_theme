@@ -4,7 +4,7 @@
     <div class="latest-news">{{ collection.description }}</div>
   {% endif %}
 
-  {% paginate collection.products by 2 %}   
+  {% paginate collection.products by 5 %}   
   <div class="main2cols clearfix">
     <div class="maincol">
         
@@ -55,7 +55,7 @@
                       <div class="product-main-info clearfix">
                         <div class="image">
                           <a href="{{product.url}}">
-                            <img src="{{ product.featured_image | product_img_url: 'small' }}" alt="{{ product.title | escape }}"/>
+                            <img src="{{ product.featured_image | product_img_url: 'medium' }}" alt="{{ product.title | escape }}"/>
                           </a>  
                         </div>
                         <div class="product-price">
@@ -81,25 +81,6 @@
                 {% endif %}
               
             {% endfor %}           
-            
-            
-            
-            
-            
-            <li class="even clearfix">
-              <div class="product-main-info clearfix">
-                <div class="image">
-                  <img src="/files/shops/random_number/products/arbor_draft_medium.jpg" alt="Victorian Red" />
-                </div>
-                <div class="product-price">PRICE: <strong>$49</strong></div>
-              </div>
-              <div class="bottom-info clearfix">
-                <a href="{{product.url}}" class="button">View Details</a>
-                <a class="button" href="#">ADD TO CART</a>
-                <div class="title"><a href="{{product.url}}">{{product.title}}</a></div>
-              </div>
-              <div class="bottom-design"></div>
-            </li>
           </ul>
         </div>
 
@@ -108,7 +89,6 @@
 
         <div class="pages-navigation clearfix">
           {% if paginate.previous %}
-            {{ paginate.previous.title | link_to: paginate.previous.url }}
             <span class="page-prev">
               <a href="{{paginate.previous.url}}" class="button page-prev">
                 <img src="{{ 'arrow-left.gif' | asset_url }}" alt="Go to previous page" /> PREVIOUS
